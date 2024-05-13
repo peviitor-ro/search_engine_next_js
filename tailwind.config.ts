@@ -7,7 +7,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-     screens: {
+    screens: {
       sm: "640px",
       md: "768px",
       lg: "1024px",
@@ -28,7 +28,6 @@ const config: Config = {
         background_dark_blue: "#032239",
         white: "#ffffff",
       },
-      // background:{}
     },
   },
   plugins: [],
