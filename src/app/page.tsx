@@ -1,15 +1,13 @@
-"use client";
 import Image from "next/image";
 import Search from "./components/Search";
 import peViitorLogo from "@/app/assets/svg/logo.svg";
 import racheta from "@/app/assets/svg/racheta.svg";
 import dungi from "@/app/assets/svg/dungi.svg";
-import { useJobsContext } from "./context/JobProvider";
 import Footer from "./components/Footer";
+import { getNumberOfJobs } from "@/lib/fetchData";
 
-export default function Home() {
-  const { jobs } = useJobsContext();
-  const { numFound } = jobs;
+export default async function Home() {
+  const numFound = await getNumberOfJobs();
 
   return (
     <div className="landing-page flex flex-col justify-between items-center py-5 min-h-[100vh]">

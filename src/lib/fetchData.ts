@@ -1,7 +1,7 @@
 import { JobsResults } from "@/models/Jobs";
 import { JobsSchema } from "@/models/Jobs";
 import { CompaniesName, CompaniesNameSchema } from "@/models/companiesSchema";
-import { API_COMPANIES, API_JOBS } from "./apiUrl";
+import { API_COMPANIES, API_JOBS, API_JOBS_NUMBERS } from "./apiUrl";
 
 export default async function fetchData(
   createQueryString?: string
@@ -58,3 +58,19 @@ export const getNameOfCompanies = async (): Promise<
     console.error("Error fetching data (companies name):", e);
   }
 };
+
+// get number of Jobs
+export async function getNumberOfJobs(): Promise<number | undefined> {
+  try {
+    const res = await fetch(API_JOBS_NUMBERS);
+
+    if (!res.ok) {
+      throw new Error("Fetch error: Server responded with an error");
+    }
+
+    const jobsResults = await res.json();
+    return jobsResults.response.numFound;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
