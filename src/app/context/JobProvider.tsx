@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { JobsResults } from "@/models/Jobs";
 import { createSearchString } from "@/lib/createSearchString";
 import fetchData from "@/lib/fetchData";

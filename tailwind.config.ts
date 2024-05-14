@@ -7,6 +7,11 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      PoppinsLight: ["PoppinsLight", "sans-serif"],
+      JustMandrone: ["JustMandrone", "sans-serif"],
+      PoppinsRegular: ["PoppinsRegular", "sans-serif"],
+    },
     screens: {
       sm: "640px",
       md: "768px",
@@ -21,7 +26,7 @@ const config: Config = {
         border_grey_lighter: "#dfe3e6",
         text_orange: "#f3781d",
         text_ink_black: "#090a0a",
-        text_grey: "#979c9e",
+        text_grey: "#4b4646",
         text_grey_darker: "#6f777a",
         background_green: "#048a81",
         background_grey: "#f0f3f6",

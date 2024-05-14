@@ -4,30 +4,21 @@
 
 @font-face {
   font-family: "JustMandrone";
-  src: url("/fonts/Just-Mandrawn.ttf") format("truetype");
+  src: url("../app/assets/fonts/Just-Mandrawn.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "PoppinsLight";
-  src: url("/fonts/Poppins-Light.ttf") format("truetype");
+  src: url("../app/assets/fonts/Poppins-Light.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "PoppinsRegular";
-  src: url("/fonts/Poppins-Regular.ttf") format("truetype");
+  src: url("../app/assets/fonts/Poppins-Regular.ttf") format("truetype");
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: none;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.landing-page {
+  background: url("../app/assets/images/landing-cover.png") no-repeat center
+    center fixed;
+  background-size: cover;
 }
