@@ -1,39 +1,50 @@
-"use client";
-
 import Search from "./Search";
-import FiltreCheckbox from "./FiltreCheckbox";
-import { useJobsContext } from "../context/JobProvider";
 import JobCard from "./JobCard";
+import fetchData from "@/lib/fetchData";
+import { createSearchString } from "@/lib/createSearchString";
+import FiltreCheckbox from "./FiltreCheckbox";
 
-const Joburi = () => {
-  const { jobs, loadMoreJobs } = useJobsContext();
+const NewCards = async ({
+  q,
+  remote,
+  company,
+}: {
+  q: string | undefined;
+  company: string | undefined;
+  remote: string | undefined;
+}) => {
+  const paramsSearch = createSearchString(
+    q,
+    "",
+    "",
+    "România",
+    company,
+    remote,
+    "1"
+  );
 
-  const { numFound, docs } = jobs;
-
-  const handleLoadMore = async () => {
-    await loadMoreJobs();
-  };
-
-  if (numFound === 0) return <h2>No Jobs</h2>;
+  const data = await fetchData(paramsSearch);
+  // if (numFound === 0) return <h2>No Jobs</h2>;
 
   return (
     <>
       <Search />
+
       <FiltreCheckbox />
       <section>
         <strong>
-          <h2>Total Jobs: {jobs.numFound}</h2>
+          <h2>Total Jobs: {data?.numFound}</h2>
         </strong>
-        {docs.map((item) => (
-          <JobCard item={item} />
+        {data?.docs.map((item, index) => (
+          <JobCard item={item} key={index} />
         ))}
 
-        {numFound === docs.length ? null : (
+        {/* {numFound === docs.length ? null : (
           <button onClick={handleLoadMore}>Load More Jobs</button>
-        )}
+        )} */}
       </section>
     </>
   );
 };
 
-export default Joburi;
+export default NewCards;
