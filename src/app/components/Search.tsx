@@ -2,25 +2,36 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useState, FormEvent } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState, FormEvent, useCallback } from "react";
 import logo from "../assets/svg/logo.svg";
 import magnifyGlass from "../assets/svg/magniy_glass_icon.svg";
-import { useJobsContext } from "../context/JobProvider";
 
 function Search() {
-  const { setQ } = useJobsContext();
-  const [text, setText] = useState<string | undefined>("");
+  const [text, setText] = useState("");
+  const searchParams = useSearchParams()!;
 
   const router = useRouter();
   const pathName = usePathname();
 
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setQ(text);
-
-    router.push(`/rezultate`);
+    if (text === "") {
+      router.push(`/rezultate`);
+    } else {
+      router.push(`/rezultate?${createQueryString("q", text)}`);
+    }
   };
 
   // remove text from input on X button.
@@ -31,7 +42,7 @@ function Search() {
   return (
     <div>
       <div className="flex flex-col md:flex-row items-center justify-center pt-5 gap-2">
-        {pathName.startsWith("/results") && (
+        {pathName.startsWith("/rezultate") && (
           <Link href="/" className="logo">
             <Image src={logo} alt="logo_peviitor" />
           </Link>

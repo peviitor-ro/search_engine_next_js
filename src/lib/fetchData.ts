@@ -21,7 +21,6 @@ export default async function fetchData(
     }
 
     const jobsResults = await res.json();
-
     if (!jobsResults || !jobsResults.response) {
       throw new Error("Response data is missing or invalid");
     }

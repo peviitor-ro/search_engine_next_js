@@ -1,11 +1,11 @@
 export function createSearchString(
-  q?: string,
+  q?: string[] | string,
   city?: string | string[],
   county?: string | string[],
   country?: string,
   company?: string | string[],
   remote?: string | string[],
-  page?: number
+  page?: string
 ): string {
   const queryParams: string[] = [];
 

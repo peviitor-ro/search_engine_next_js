@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
 type checkboxProps = {
   items: string[] | undefined;
   filterKey: string;
   searchFor: string;
-  handleCheckBoxChange: (value: string, type: string) => void;
-  company?: string[];
+  checked?: string[];
 };
 // Regular expressions for replacing special characters
 const aREG = new RegExp("ș", "g");
@@ -19,11 +19,13 @@ const CheckboxFilter = ({
   items,
   filterKey,
   searchFor,
-  company,
-  handleCheckBoxChange,
+  checked,
 }: checkboxProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   // Filtering items based on search query
   const filteredItems = items?.filter(
@@ -49,6 +51,29 @@ const CheckboxFilter = ({
   const displayItems =
     searchQuery.length >= 1 ? filteredItems : items?.slice(0, 20);
 
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      const currentValues = params.getAll(name);
+
+      if (currentValues.includes(value)) {
+        // Remove the value if it exists
+        params.delete(name);
+        currentValues
+          .filter((val) => val !== value)
+          .forEach((val) => {
+            params.append(name, val);
+          });
+      } else {
+        // Add the value if it doesn't exist
+        params.append(name, value);
+      }
+
+      router.push(`${pathname}?${params.toString()}`);
+    },
+    [searchParams]
+  );
+
   return (
     <div>
       <div>
@@ -71,10 +96,8 @@ const CheckboxFilter = ({
                 id={item}
                 name={filterKey}
                 value={item}
-                checked={company && company.includes(item)}
-                onChange={(e) =>
-                  handleCheckBoxChange(e.target.value, filterKey)
-                }
+                checked={checked?.includes(item)}
+                onChange={(e) => createQueryString(filterKey, e.target.value)}
               />
               <label htmlFor={item}>{item}</label>
             </div>

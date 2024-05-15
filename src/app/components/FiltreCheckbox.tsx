@@ -1,41 +1,36 @@
-import { getNameOfCompanies } from "@/lib/fetchData";
-import { useEffect, useState } from "react";
+"use client";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import CheckboxFilter from "./CheckboxSkeleton";
-import { useJobsContext } from "../context/JobProvider";
 import { CompaniesName } from "@/models/companiesSchema";
+import { getNameOfCompanies } from "@/lib/fetchData";
 
-export default function FiltreCheckbox() {
+function FiltreCheckbox() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const remote = searchParams.getAll("remote");
+  const city = searchParams.getAll("city");
+  const company = searchParams.getAll("company");
   const [data, setData] = useState<CompaniesName | undefined>();
-  const { remote, setRemote, city, setCity, company, setCompany } =
-    useJobsContext();
 
-  const handleCheckBoxChange = (value: string, type: string) => {
-    // Define state object mapping
-    const stateMap: Record<
-      string,
-      [string[], React.Dispatch<React.SetStateAction<string[]>>]
-    > = {
-      remote: [remote, setRemote],
-      oras: [city, setCity],
-      companie: [company, setCompany],
-    };
+  // Get a new searchParams string by merging the current
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const currentParams = new URLSearchParams(searchParams.toString());
 
-    // Ensure type is valid
-    if (stateMap[type]) {
-      const [currentValues, setCurrentValues] = stateMap[type];
-      const isChecked = currentValues.includes(value);
-
-      // Update state based on current values
-      if (isChecked) {
-        const updatedValues = currentValues.filter((item) => item !== value);
-        setCurrentValues(updatedValues);
+      if (remote.includes(value)) {
+        // If the radio button is already checked, uncheck it
+        currentParams.delete(name);
       } else {
-        setCurrentValues([...currentValues, value]);
+        // Otherwise, set the radio button value
+        currentParams.set(name, value);
       }
-    } else {
-      console.error(`Invalid type: ${type}`);
-    }
-  };
+
+      router.push(`${pathname}?${currentParams.toString()}`);
+    },
+    [searchParams]
+  );
 
   // Fetching company data
   useEffect(() => {
@@ -51,9 +46,8 @@ export default function FiltreCheckbox() {
     fetchData();
   }, []);
 
-  // Rendering the component
   return (
-    <div className="drop-down-parent">
+    <div>
       <div className="checkbox-remote">
         <div>
           <input
@@ -62,8 +56,8 @@ export default function FiltreCheckbox() {
             name="on-site"
             value="on-site"
             className="mdl"
-            // checked={fields.remote.includes("on-site")}
-            onChange={(e) => handleCheckBoxChange(e.target.value, "remote")}
+            checked={remote?.includes("on-site")}
+            onChange={(e) => createQueryString("remote", e.target.value)}
           />
           <label htmlFor="on-site">La fata locului</label>
         </div>
@@ -74,8 +68,8 @@ export default function FiltreCheckbox() {
             name="hibrid"
             value="hibrid"
             className="mdl"
-            // checked={fields.remote.includes("hibrid")}
-            onChange={(e) => handleCheckBoxChange(e.target.value, "remote")}
+            checked={remote?.includes("hibrid")}
+            onChange={(e) => createQueryString("remote", e.target.value)}
           />
           <label htmlFor="hibrid">Hibrid</label>
         </div>
@@ -86,44 +80,21 @@ export default function FiltreCheckbox() {
             name="remote"
             value="Remote"
             className="mdl"
-            // checked={fields.remote.includes("Remote")}
-            onChange={(e) => handleCheckBoxChange(e.target.value, "remote")}
+            checked={remote?.includes("Remote")}
+            onChange={(e) => createQueryString("remote", e.target.value)}
           />
           <label htmlFor="Remote">La distanță</label>
         </div>
       </div>
 
-      <div className="checkbox-orase">
-        <div>
-          <input
-            type="checkbox"
-            id="Oradea"
-            name="Oradea"
-            value="Oradea"
-            className="mdl"
-            onChange={(e) => handleCheckBoxChange(e.target.value, "oras")}
-          />
-          <label htmlFor="Oradea">Oradea</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="Iasi"
-            name="Iasi"
-            value="Iasi"
-            onChange={(e) => handleCheckBoxChange(e.target.value, "oras")}
-          />
-          <label htmlFor="Iasi">Iasi</label>
-        </div>
-      </div>
-
       <CheckboxFilter
         items={data}
-        filterKey="companie"
-        searchFor="companie"
-        handleCheckBoxChange={handleCheckBoxChange}
-        company={company}
+        filterKey="company"
+        searchFor="company"
+        checked={company}
       />
     </div>
   );
 }
+
+export default FiltreCheckbox;
