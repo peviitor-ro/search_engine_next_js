@@ -1,32 +1,12 @@
 import JobCard from "./JobCard";
 import fetchData from "@/lib/fetchData";
 import { createSearchString } from "@/lib/createSearchString";
+import { JobsResults } from "@/models/Jobs";
 
-const Joburi = async ({
-  q,
-  remote,
-  company,
-  page,
-}: {
-  q: string | undefined;
-  company: string | undefined;
-  remote: string | undefined;
-  page: string | undefined;
-}) => {
-  page = "1";
-
-  const paramsSearch = createSearchString(
-    q,
-    "",
-    "",
-    "România",
-    company,
-    remote,
-    page
-  );
-
-  const data = await fetchData(paramsSearch);
-
+type Props = {
+  data: JobsResults | undefined;
+};
+const Joburi = async ({ data }: Props) => {
   const nrJoburi =
     (data?.numFound ?? 0) >= 20
       ? "de rezultate"

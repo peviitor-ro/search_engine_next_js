@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function JobCard({ item }: Props) {
-  const { id, job_title, company_str, company, job_link, city, remote } = item;
+  const { job_title, company, job_link, city, remote } = item;
 
   function displayLocation(cities: string[] | undefined) {
     return cities
@@ -32,10 +32,10 @@ export default function JobCard({ item }: Props) {
       <div className="flex flex-col justify-between gap-5">
         <p className="leading-5">{company}</p>
         <p className="text-lg font-bold">{job_title}</p>
-        <p>
-          <Image src={mapPin} alt="map pin" className="px-4 h-[16px]" />
-          {city || remote ? displayLocation(city) : "asd"}
-        </p>
+        <div className="flex items-center justify-center gap-1">
+          <Image src={mapPin} alt="map_pin" className="h-[16px]" />
+          <p>{city || remote ? displayLocation(city) : ""}</p>
+        </div>
         <a
           href={job_link[0]}
           target="_blank"

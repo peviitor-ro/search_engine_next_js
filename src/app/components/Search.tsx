@@ -18,10 +18,10 @@ function Search() {
     e.preventDefault();
 
     if (!text.trim()) {
-      router.push("/rezultate");
+      router.push("/rezultate?page=1");
       router.refresh();
     } else {
-      router.push(`/rezultate?q=${text}`);
+      router.push(`/rezultate?q=${text}&page=1`);
     }
   };
 
