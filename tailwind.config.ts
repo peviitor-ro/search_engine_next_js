@@ -31,7 +31,13 @@ const config: Config = {
         background_green: "#048a81",
         background_grey: "#f0f3f6",
         background_dark_blue: "#032239",
+        background_cards: "#fbfbfb",
         white: "#ffffff",
+      },
+      boxShadow: {
+        card_shadow: "0px 1px 3px 1px #00000026",
+        hover_card_shadow: "0px 1px 2px 0px #0000004d",
+        button_shadow: "0px 5px 5px 0px #00000040 inset",
       },
     },
   },

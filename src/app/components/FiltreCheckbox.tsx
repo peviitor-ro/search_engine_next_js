@@ -29,7 +29,7 @@ function FiltreCheckbox() {
 
       router.push(`${pathname}?${currentParams.toString()}`);
     },
-    [searchParams]
+    [searchParams, pathname, router, remote]
   );
 
   // Fetching company data
