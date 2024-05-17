@@ -19,8 +19,9 @@ function Search() {
 
     if (!text.trim()) {
       router.push("/rezultate");
+      router.refresh();
     } else {
-      router.push(`/rezultate?q=${encodeURIComponent(text.trim())}`);
+      router.push(`/rezultate?q=${text}`);
     }
   };
 
@@ -48,6 +49,8 @@ function Search() {
           />
           <input
             type="text"
+            id="input"
+            autoComplete="off"
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Ce doriți să lucrați?"

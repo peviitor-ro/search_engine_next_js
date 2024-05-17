@@ -71,7 +71,7 @@ const CheckboxFilter = ({
 
       router.push(`${pathname}?${params.toString()}`);
     },
-    [searchParams]
+    [searchParams, router, pathname]
   );
 
   return (
@@ -87,7 +87,7 @@ const CheckboxFilter = ({
 
       <div>
         {error ? (
-          <div>No results found for "{searchQuery}"</div>
+          <div>No results found for {searchQuery}</div>
         ) : (
           displayItems?.map((item, index) => (
             <div key={index}>

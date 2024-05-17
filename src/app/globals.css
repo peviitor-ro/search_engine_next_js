@@ -22,3 +22,9 @@
     center fixed;
   background-size: cover;
 }
+
+.rezultate-pagina {
+  background: url("../app/assets/images/rezultate-cover.png") no-repeat center
+    center fixed;
+  background-size: cover;
+}
