@@ -7,6 +7,15 @@ import Footer from "./components/Footer";
 import { getNumberOfJobs } from "@/lib/fetchData";
 import { Suspense } from "react";
 
+export async function generateMetadata() {
+  const numFound = await getNumberOfJobs();
+
+  return {
+    title: `pe viitor | ${numFound}`,
+    description: `peste ${numFound} locuri de munca in`,
+  };
+}
+
 export default async function Home() {
   const numFound = await getNumberOfJobs();
 
