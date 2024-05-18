@@ -8,6 +8,39 @@ import { createSearchString } from "@/lib/createSearchString";
 import fetchData from "@/lib/fetchData";
 import { JobsResults } from "@/models/Jobs";
 
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: {
+    q: string | undefined;
+    company: string | undefined;
+    remote: string | undefined;
+    page: string | undefined;
+  };
+}) {
+  const query = searchParams?.q || "";
+  const company = searchParams?.company || "";
+  const remote = searchParams?.remote || "";
+  const page = searchParams?.page || "";
+
+  const paramsSearch = createSearchString(
+    query,
+    "",
+    "",
+    "România",
+    company,
+    remote,
+    page
+  );
+
+  const data: JobsResults | undefined = await fetchData(paramsSearch);
+  const numFound: number | undefined = data?.numFound;
+  return {
+    title: `Job: ${query} | Rezultate: ${numFound}`,
+    description: `Peste ${numFound} de locuri de munca pe postul de ${query} la firma ${company}`,
+  };
+}
+
 export default async function SearchResults({
   searchParams,
 }: {
