@@ -1,6 +1,6 @@
 import { JobsResults } from "@/models/Jobs";
 import { JobsSchema } from "@/models/Jobs";
-import { CompaniesName, CompaniesNameSchema } from "@/models/companiesSchema";
+import { CompaniesName, CompaniesNameSchema } from "@/models/dataSchema";
 import { API_COMPANIES, API_JOBS, API_JOBS_NUMBERS } from "./apiUrl";
 
 export default async function fetchData(

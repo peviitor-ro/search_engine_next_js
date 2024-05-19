@@ -1,6 +1,4 @@
 import JobCard from "./JobCard";
-import fetchData from "@/lib/fetchData";
-import { createSearchString } from "@/lib/createSearchString";
 import { JobsResults } from "@/models/Jobs";
 
 type Props = {
