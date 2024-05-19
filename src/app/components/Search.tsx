@@ -51,9 +51,9 @@ function Search() {
         newParams.set(key, val);
       });
 
-      return `${pathName}?${newParams.toString()}`;
+      return `${newParams.toString()}`;
     },
-    [searchParams, pathName]
+    [searchParams]
   );
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -63,7 +63,7 @@ function Search() {
       router.push("/rezultate?pagina=1");
       router.refresh();
     } else {
-      router.push(`${createQueryString("job", text)}`);
+      router.push(`/rezultate?${createQueryString("job", text)}`);
     }
   };
 
