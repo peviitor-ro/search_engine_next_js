@@ -119,3 +119,26 @@ Aceste funcționalități îți oferă o experiență optimizată în căutarea 
 ## Cum să începi
 
 Pentru a începe cu Motorul nostru de Căutare de Joburi, vizitează pur și simplu site-ul nostru și începe-ți căutarea de joburi astăzi!
+
+## Cum să Instalezi
+
+Pentru a instala și rula acest proiect local, urmează pașii de mai jos:
+
+1. **Clonează repository-ul**:
+
+   ```bash
+   git clone https://github.com/username/repo-name.git
+   cd repo-name
+
+   ```
+
+2. **Instalează dependențele**:
+    ``` npm install  ```
+
+3. **Rulează aplicația**:
+    ``` npm run dev  ```
+
+4. **Accesează aplicația**:
+    ``` Deschide browser-ul și mergi la `http://localhost:3000`  ```
+
+Acum ai totul configurat și poți începe să utilizezi și să contribui la motorul nostru de căutare de joburi!
