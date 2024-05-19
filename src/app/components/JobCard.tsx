@@ -2,6 +2,7 @@ import { Job } from "@/models/Jobs";
 import imagesPlaceholder from "@/app/assets/svg/no-logo.svg";
 import mapPin from "@/app/assets/svg/map_pin.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   item: Job;
@@ -33,16 +34,16 @@ export default function JobCard({ item }: Props) {
         <p className="leading-5">{company}</p>
         <p className="text-lg font-bold">{job_title}</p>
         <div className="flex items-center justify-center gap-1">
-          <Image src={mapPin} alt="map_pin" className="h-[16px]" />
+          <Image src={mapPin} alt="map_pin" className="w-auto h-[16px]" />
           <p>{city || remote ? displayLocation(city) : ""}</p>
         </div>
-        <a
+        <Link
           href={job_link[0]}
           target="_blank"
           className="bg-background_green px-[40px] py-[14px] text-white rounded-3xl mx-auto hover:shadow-button_shadow"
         >
           Catre Site
-        </a>
+        </Link>
       </div>
     </div>
   );

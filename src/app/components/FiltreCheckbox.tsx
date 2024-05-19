@@ -2,16 +2,16 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import CheckboxFilter from "./CheckboxSkeleton";
-import { CompaniesName } from "@/models/companiesSchema";
+import { CompaniesName } from "@/models/dataSchema";
 import { getNameOfCompanies } from "@/lib/fetchData";
 
 function FiltreCheckbox() {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const remote = searchParams.getAll("remote");
-  const city = searchParams.getAll("city");
-  const company = searchParams.getAll("company");
+  const remote = searchParams.getAll("tipJob");
+  const city = searchParams.getAll("oras");
+  const company = searchParams.getAll("companie");
   const [data, setData] = useState<CompaniesName | undefined>();
 
   // Get a new searchParams string by merging the current
@@ -57,7 +57,7 @@ function FiltreCheckbox() {
             value="on-site"
             className="mdl"
             checked={remote?.includes("on-site")}
-            onChange={(e) => createQueryString("remote", e.target.value)}
+            onChange={(e) => createQueryString("tipJob", e.target.value)}
           />
           <label htmlFor="on-site">La fata locului</label>
         </div>
@@ -69,7 +69,7 @@ function FiltreCheckbox() {
             value="hibrid"
             className="mdl"
             checked={remote?.includes("hibrid")}
-            onChange={(e) => createQueryString("remote", e.target.value)}
+            onChange={(e) => createQueryString("tipJob", e.target.value)}
           />
           <label htmlFor="hibrid">Hibrid</label>
         </div>
@@ -81,7 +81,7 @@ function FiltreCheckbox() {
             value="Remote"
             className="mdl"
             checked={remote?.includes("Remote")}
-            onChange={(e) => createQueryString("remote", e.target.value)}
+            onChange={(e) => createQueryString("tipJob", e.target.value)}
           />
           <label htmlFor="Remote">La distanță</label>
         </div>
@@ -89,8 +89,8 @@ function FiltreCheckbox() {
 
       <CheckboxFilter
         items={data}
-        filterKey="company"
-        searchFor="company"
+        filterKey="companie"
+        searchFor="companie"
         checked={company}
       />
     </div>

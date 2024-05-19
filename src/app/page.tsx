@@ -6,8 +6,9 @@ import dungi from "@/app/assets/svg/dungi.svg";
 import Footer from "./components/Footer";
 import { getNumberOfJobs } from "@/lib/fetchData";
 import { Suspense } from "react";
+import { Metadata } from "next";
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const numFound = await getNumberOfJobs();
 
   return {

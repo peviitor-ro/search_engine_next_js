@@ -3,25 +3,67 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useCallback } from "react";
 import logo from "../assets/svg/logo.svg";
 import magnifyGlass from "../assets/svg/magniy_glass_icon.svg";
 
 function Search() {
   const searchParams = useSearchParams()!;
-  const getQ = searchParams.get("q");
+  const getQ = searchParams.get("job");
   const router = useRouter();
   const pathName = usePathname();
   const [text, setText] = useState(getQ || "");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const currentParams = new URLSearchParams(searchParams.toString());
+
+      // Check if search action is performed
+      const isSearchAction = name && value;
+
+      // Reset page parameter to 1 if it's a search action
+      if (isSearchAction) {
+        currentParams.set("pagina", "1");
+      }
+
+      if (name) {
+        currentParams.set(name, value);
+      } else {
+        currentParams.delete(name);
+      }
+
+      // Extract job parameter
+      const job = currentParams.get("job");
+      if (job) {
+        currentParams.delete("job");
+      }
+
+      // Create a new URLSearchParams object
+      const newParams = new URLSearchParams();
+
+      // Add job parameter first if it exists
+      if (job) {
+        newParams.set("job", job);
+      }
+
+      // Add the rest of the parameters
+      currentParams.forEach((val, key) => {
+        newParams.set(key, val);
+      });
+
+      return `${pathName}?${newParams.toString()}`;
+    },
+    [searchParams, pathName]
+  );
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!text.trim()) {
-      router.push("/rezultate?page=1");
+      router.push("/rezultate?pagina=1");
       router.refresh();
     } else {
-      router.push(`/rezultate?q=${text}&page=1`);
+      router.push(`${createQueryString("job", text)}`);
     }
   };
 
