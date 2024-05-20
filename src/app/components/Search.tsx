@@ -14,6 +14,7 @@ function Search() {
   const pathName = usePathname();
   const [text, setText] = useState(getQ || "");
 
+  // Create query for the job title
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const currentParams = new URLSearchParams(searchParams.toString());

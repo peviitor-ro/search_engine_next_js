@@ -19,6 +19,7 @@ export async function generateMetadata({
     pagina: string | undefined;
   };
 }): Promise<Metadata> {
+  // Extract values from searchParams and if the value is undefined sets to "
   const query = searchParams?.job || "";
   const company = searchParams?.companie || "";
   const remote = searchParams?.remote || "";
@@ -54,6 +55,7 @@ export default async function SearchResults({
     pagina: string | undefined;
   };
 }) {
+  // Extract values from searchParams and if the value is undefined sets to ""
   const query = searchParams?.job || "";
   const company = searchParams?.companie || "";
   const remote = searchParams?.tipJob || "";
