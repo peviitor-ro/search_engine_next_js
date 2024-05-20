@@ -3,6 +3,7 @@ import fetchData from "@/lib/fetchData";
 import { MetadataRoute } from "next";
 
 const urlSite = "https://peviitor.ro/";
+
 export default async function sitemap({
   searchParams,
 }: {
@@ -11,6 +12,7 @@ export default async function sitemap({
   };
 }): Promise<MetadataRoute.Sitemap> {
   const jobEntries: MetadataRoute.Sitemap = [];
+  const seenJobTitles = new Set<string>();
 
   try {
     let currentPage = 1;
@@ -31,13 +33,19 @@ export default async function sitemap({
       const doc = data?.docs;
 
       if (doc && Array.isArray(doc)) {
-        const entries = doc.map(({ job_title }) => ({
-          url: `${urlSite}/rezultate?job=${encodeURIComponent(
-            job_title.map((title) => title.replace(/&/g, "&amp;")).join(",")
-          )}`,
-          changefreq: "weekly",
-        }));
-        jobEntries.push(...entries);
+        for (const { job_title } of doc) {
+          for (const title of job_title) {
+            if (!seenJobTitles.has(title)) {
+              seenJobTitles.add(title);
+              jobEntries.push({
+                url: `${urlSite}rezultate?job=${encodeURIComponent(
+                  title.replace(/&/g, "&amp;")
+                )}`,
+                changeFrequency: "weekly",
+              });
+            }
+          }
+        }
       } else {
         throw new Error("Invalid data format or empty data");
       }
