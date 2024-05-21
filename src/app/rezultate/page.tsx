@@ -51,24 +51,26 @@ export default async function SearchResults({
   searchParams: {
     job: string | undefined;
     companie: string | undefined;
+    oras: string | undefined;
     tipJob: string | undefined;
     pagina: string | undefined;
   };
 }) {
   // Extract values from searchParams and if the value is undefined sets to ""
   const query = searchParams?.job || "";
-  const company = searchParams?.companie || "";
-  const remote = searchParams?.tipJob || "";
-  const page = searchParams?.pagina || "1";
+  const companie = searchParams?.companie || "";
+  const oras = searchParams?.oras || "";
+  const tipJob = searchParams?.tipJob || "";
+  const pagina = searchParams?.pagina || "1";
 
   const paramsSearch = createSearchString(
     query,
-    "",
+    oras,
     "",
     "România",
-    company,
-    remote,
-    page
+    companie,
+    tipJob,
+    pagina
   );
 
   const data: JobsResults | undefined = await fetchData(paramsSearch);
