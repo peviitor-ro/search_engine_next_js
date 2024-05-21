@@ -18,8 +18,6 @@ This documentation provides a comprehensive overview of the files within the `Co
 
    - The `Search.tsx` file includes the input field for searching jobs by title. The `handleSubmit` function works by redirecting to the page `/rezultate?pagina=1` with all available jobs if the input is empty. If text is entered, it redirects to the specific job search results page `/rezultate?job=FrontEnd&pagina=1`. The `createQueryString` function takes two parameters: `name` and `value`. The `name` parameter is always job, and the `value` is the user's input. When the user presses `Enter` or clicks the `Cauta` button, this function is triggered, adding the job title to the URL.
 
-<!-- ! need changes when the component is completed (ui + functionalities)-->
-
 2. 📝 `FiltreCheckbox.tsx`
 
    ### Description

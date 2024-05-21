@@ -28,3 +28,12 @@
     center fixed;
   background-size: cover;
 }
+
+.scrollbar-class::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-class::-webkit-scrollbar-thumb {
+  background-color: #048a81;
+  border-radius: 26px;
+  cursor: pointer;
+}
