@@ -50,7 +50,7 @@ const DisplayFilters = () => {
       >
         {item}
         <span
-          className="cursor-pointer"
+          className="cursor-pointer ml-2"
           onClick={() => handleFilterDelete("tipJob", item)}
         >
           X
@@ -67,7 +67,7 @@ const DisplayFilters = () => {
       >
         {item}
         <span
-          className="cursor-pointer"
+          className="cursor-pointer ml-2"
           onClick={() => handleFilterDelete("oras", item)}
         >
           X
@@ -84,7 +84,7 @@ const DisplayFilters = () => {
       >
         {item}
         <span
-          className="cursor-pointer"
+          className="cursor-pointer ml-2"
           onClick={() => handleFilterDelete("companie", item)}
         >
           X
