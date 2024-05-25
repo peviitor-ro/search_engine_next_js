@@ -29,6 +29,8 @@ const config: Config = {
         text_grey: "#4b4646",
         text_grey_darker: "#6f777a",
         background_green: "#048a81",
+        background_green_light: "#DBE8E9",
+
         background_grey: "#f0f3f6",
         background_dark_blue: "#032239",
         background_cards: "#fbfbfb",
