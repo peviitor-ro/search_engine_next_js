@@ -21,13 +21,13 @@ const Joburi = async ({ data }: Props) => {
         {data?.numFound} {nrJoburi}
       </h2>
       {/* Check if there are no results and render the NoResults component */}
-      {data?.numFound === 0 ? <FaraRezultate /> : null}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-7">
-        {data?.docs.map((item, index) => (
-          <JobCard item={item} key={index} />
-        ))}
-      </div>
-
+      {data?.numFound === 0 ? <FaraRezultate /> :
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-7">
+          {data?.docs.map((item, index) => (
+            <JobCard item={item} key={index} />
+          ))}
+        </div>
+      }
       {/* {numFound === docs.length ? null : (
           <button onClick={handleLoadMore}>Load More Jobs</button>
         )} */}
