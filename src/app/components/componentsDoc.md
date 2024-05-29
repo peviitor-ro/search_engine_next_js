@@ -9,6 +9,7 @@ This documentation provides a comprehensive overview of the files within the `Co
 5. 📌 `JobCard.tsx`
 6. 📑 `Pagination.tsx`
 7. ⚙️ `Footer.tsx`
+8. 🙅‍♂️ `NoResults.tsx`
 
 ## More details
 
@@ -57,3 +58,9 @@ This documentation provides a comprehensive overview of the files within the `Co
    ### Description
 
    - The `Footer.tsx` contains links to our social media platforms and copyright information.
+
+8. 🙅‍♂️`NoResults.tsx`
+
+   ### Description
+
+   - The `NoResults.tsx` file renders a user interface when a search yields no results. This component is designed to provide a user-friendly message and graphic indicating that no search results were found, along with a suggestion to modify the search criteria or start a new search.
