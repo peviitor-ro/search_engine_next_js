@@ -117,7 +117,7 @@ function Search() {
           )}
           <button
             type="submit"
-            className="m-auto bg-background_green text-white w-[122px] h-[54px] font-medium text-base px-10 py-3 rounded-full transition duration-300 ease-out hover:shadow-md focus:outline-none"
+            className="m-auto bg-background_green text-white w-[122px] h-[54px] font-medium text-base px-10 py-3 rounded-full transition duration-300 ease-out hover:shadow-button_shadow focus:outline-none"
           >
             Caută
           </button>

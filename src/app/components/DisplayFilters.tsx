@@ -51,7 +51,7 @@ const DisplayFilters = () => {
       type.map((item) => (
         <li
           key={item}
-          className="py-2 px-4 bg-background_green_light border-r rounded-3xl text-sm flex items-center"
+          className="py-2 px-4 bg-background_green_light rounded-3xl flex items-center"
         >
           {item}
           <Image
@@ -66,21 +66,22 @@ const DisplayFilters = () => {
   }
 
   return (
-    <div className="pb-9 flex flex-wrap max-w-7xl">
-      <ul className="flex gap-2 flex-wrap">
-        {renderFilter(city)}
-        {renderFilter(company)}
-        {renderFilter(remote)}
-      </ul>
+    <ul className="pb-9 flex gap-2 flex-wrap justify-center lg:justify-start">
+      {renderFilter(city)}
+      {renderFilter(remote)}
+      {renderFilter(company)}
       {filtersArray.length > 0 && (
-        <div className="h-auto w-[1px] ml-4 bg-background_dark_blue flex">
-          <hr></hr>
-          <span className="cursor-pointer ml-4" onClick={handleDeleteAll}>
-            Sterge Filtre
+        <div className="flex gap-2 ml-4">
+          <hr className="h-auto w-[1px] bg-background_dark_blue" />
+          <span
+            className="self-center cursor-pointer"
+            onClick={handleDeleteAll}
+          >
+            Șterge Filtre
           </span>
         </div>
       )}
-    </div>
+    </ul>
   );
 };
 
