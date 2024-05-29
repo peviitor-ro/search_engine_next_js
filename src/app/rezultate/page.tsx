@@ -16,14 +16,14 @@ export async function generateMetadata({
   searchParams: {
     job: string | undefined;
     companie: string | undefined;
-    remote: string | undefined;
+    tipJob: string | undefined;
     pagina: string | undefined;
   };
 }): Promise<Metadata> {
   // Extract values from searchParams and if the value is undefined sets to "
   const query = searchParams?.job || "";
   const company = searchParams?.companie || "";
-  const remote = searchParams?.remote || "";
+  const remote = searchParams?.tipJob || "";
   const page = searchParams?.pagina || "1";
 
   const paramsSearch = createSearchString(

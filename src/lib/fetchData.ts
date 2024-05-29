@@ -14,7 +14,7 @@ export default async function fetchData(
       url += `?${createQueryString}`;
     }
 
-    const res = await fetch(url);
+    const res = await fetch(url, { cache: "no-store" });
 
     if (!res.ok) {
       throw new Error("Fetch error: Server responded with an error");

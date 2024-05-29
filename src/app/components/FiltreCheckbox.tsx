@@ -43,8 +43,9 @@ function FiltreCheckbox() {
       } else {
         // Otherwise, set the radio button value
         currentParams.set(name, value);
+        // Set the page parameter to 1 when applying filters
+        currentParams.set("pagina", "1");
       }
-
       router.push(`${pathname}?${currentParams.toString()}`);
     },
     [searchParams, pathname, router, remote]
@@ -166,7 +167,7 @@ function FiltreCheckbox() {
             )}
             {index === 2 && (
               <React.Fragment>
-                <div className="max-w-[190px] h-[190px] flex justify-evenly flex-col gap-[5px] py-4 px-2">
+                <div className="w-[190px] h-[190px] flex justify-evenly flex-col gap-[5px] py-4 px-2">
                   <div>
                     <input
                       type="checkbox"

@@ -96,10 +96,14 @@ const CheckboxFilter = ({
           .filter((val) => val !== value)
           .forEach((val) => {
             params.append(name, val);
+            // Set the page parameter to 1 when applying filters
+            params.set("pagina", "1");
           });
       } else {
         // Add the value if it doesn't exist
         params.append(name, value);
+        // Set the page parameter to 1 when applying filters
+        params.set("pagina", "1");
       }
 
       router.push(`${pathname}?${params.toString()}`);
