@@ -94,6 +94,7 @@ function Search() {
             type="text"
             id="input"
             autoComplete="off"
+            autoFocus
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Ce doriți să lucrați?"
