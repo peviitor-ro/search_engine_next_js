@@ -8,6 +8,7 @@ import { createSearchString } from "@/lib/createSearchString";
 import fetchData from "@/lib/fetchData";
 import { JobsResults } from "@/models/Jobs";
 import { Metadata } from "next";
+import DisplayFilters from "../components/DisplayFilters";
 
 export async function generateMetadata({
   searchParams,

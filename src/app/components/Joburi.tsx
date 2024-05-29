@@ -1,3 +1,4 @@
+import DisplayFilters from "./DisplayFilters";
 import JobCard from "./JobCard";
 import { JobsResults } from "@/models/Jobs";
 import FaraRezultate from "./NoResults";
@@ -17,9 +18,11 @@ const Joburi = async ({ data }: Props) => {
 
   return (
     <main className="mb-auto">
-      <h2 className="ml-8 text-center md:text-start text-text_grey_darker my-8 text-lg">
+      <h2 className="text-center md:text-start text-text_grey_darker my-8 text-lg">
         {data?.numFound} {nrJoburi}
       </h2>
+
+      <DisplayFilters />
       {/* Check if there are no results and render the NoResults component */}
       {data?.numFound === 0 ? <FaraRezultate /> :
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-7">
