@@ -37,21 +37,23 @@ This documentation provides a comprehensive overview of the files within the `Co
 
    - The `Joburi.tsx` file serves as the parent component for `JobCard.tsx`, passing data as a prop to be displayed. Before rendering the `JobCard.tsx` components, it also displays the total number of listed jobs.
 
-<!-- ! need changes when the component is completed (logo companies)-->
-
 5. 📌 `JobCard.tsx`
 
    ### Description
 
    - The `JobCard.tsx` file contains the design and layout for individual job cards.
 
-<!-- ! need changes when the component is completed (ui + functionalities) -->
-
 6. 📑 `Pagination.tsx`
 
    ### Description
 
-   - The `Pagination.tsx` file manages the pagination of job listings. The `prevPage` and `nextPage` functions enable users to navigate to the previous or next page of job listings when the respective `Prev Page` or `Next Page` buttons are clicked.
+   - The `Pagination.tsx` file manages the pagination of job listings. Key functions within this file include:
+     - `prevPage`: Allows users to navigate to the previous page of job listings.
+     - `nextPage`: Enables navigation to the next page of job listings
+     - `firstPage`: Takes users to the first page of job listings.
+     - `lastPage`: Directs users to the last page of job listings.
+     - `goToPage`: Facilitates navigation to a specific page.
+     - `getPageNumbers`: Generates an array of page numbers for rendering pagination controls.
 
 7. ⚙️ `Footer.tsx`
 

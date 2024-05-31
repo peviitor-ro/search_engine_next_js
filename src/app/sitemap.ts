@@ -51,7 +51,8 @@ export default async function sitemap({
       }
 
       //!   change 600 with data.numFound when backend is fixed
-      totalPages = Math.ceil(600 / 12);
+      //! on 4700 error page 390
+      totalPages = Math.ceil(4700 / 12);
       currentPage++;
     } while (currentPage <= totalPages);
   } catch (error) {
