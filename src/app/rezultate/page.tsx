@@ -1,50 +1,49 @@
-import Joburi from "@/app/components/Joburi";
+import Joburi from "../components/Joburi";
 import Footer from "../components/Footer";
 import Search from "../components/Search";
 import FiltreCheckbox from "../components/FiltreCheckbox";
 import { Suspense } from "react";
 import Pagination from "../components/Pagination";
-import { createSearchString } from "@/lib/createSearchString";
-import fetchData from "@/lib/fetchData";
-import { JobsResults } from "@/models/Jobs";
+import { createSearchString } from "../../lib/createSearchString";
+import fetchData from "../../lib/fetchData";
+import { JobsResults } from "../../models/Jobs";
 import { Metadata } from "next";
-import DisplayFilters from "../components/DisplayFilters";
 
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams: {
-    job: string | undefined;
-    companie: string | undefined;
-    tipJob: string | undefined;
-    pagina: string | undefined;
-  };
-}): Promise<Metadata> {
-  // Extract values from searchParams and if the value is undefined sets to "
-  const query = searchParams?.job || "";
-  const company = searchParams?.companie || "";
-  const remote = searchParams?.tipJob || "";
-  const page = searchParams?.pagina || "1";
+// export async function generateMetadata({
+//   searchParams,
+// }: {
+//   searchParams: {
+//     job: string | undefined;
+//     companie: string | undefined;
+//     tipJob: string | undefined;
+//     pagina: string | undefined;
+//   };
+// }): Promise<Metadata> {
+//   // Extract values from searchParams and if the value is undefined sets to "
+//   const query = searchParams?.job || "";
+//   const company = searchParams?.companie || "";
+//   const remote = searchParams?.tipJob || "";
+//   const page = searchParams?.pagina || "1";
 
-  const paramsSearch = createSearchString(
-    query,
-    "",
-    "",
-    "România",
-    company,
-    remote,
-    page
-  );
+//   const paramsSearch = createSearchString(
+//     query,
+//     "",
+//     "",
+//     "România",
+//     company,
+//     remote,
+//     page
+//   );
 
-  const data: JobsResults | undefined = await fetchData(paramsSearch);
-  const numFound: number | undefined = data?.numFound;
-  return {
-    title: `Job: ${query} | Rezultate: ${numFound}`,
-    description: `Peste ${numFound} de locuri de munca pe postul de ${query} ${
-      company ? `la firma ${company}` : ""
-    }`,
-  };
-}
+//   const data: JobsResults | undefined = await fetchData(paramsSearch);
+//   const numFound: number | undefined = data?.numFound;
+//   return {
+//     title: `Job: ${query} | Rezultate: ${numFound}`,
+//     description: `Peste ${numFound} de locuri de munca pe postul de ${query} ${
+//       company ? `la firma ${company}` : ""
+//     }`,
+//   };
+// }
 
 export default async function SearchResults({
   searchParams,

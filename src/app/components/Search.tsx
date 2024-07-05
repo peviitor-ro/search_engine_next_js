@@ -76,7 +76,7 @@ function Search() {
   return (
     <div>
       <div className="flex flex-col md:flex-row items-center justify-center pt-5 gap-2">
-        {pathName.startsWith("/rezultate") && (
+        {pathName?.startsWith("/rezultate") && (
           <Link href="/" className="logo">
             <Image src={logo} alt="logo_peviitor" />
           </Link>
