@@ -1,34 +1,36 @@
-import FiltreCheckbox from "@/app/components/FiltreCheckbox";
-import Footer from "@/app/components/Footer";
-import Joburi from "@/app/components/Joburi";
-import Pagination from "@/app/components/Pagination";
-import Search from "@/app/components/Search";
+// pages/results.tsx
+
+import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import { ParsedUrlQuery } from "querystring";
 import { createSearchString } from "@/lib/createSearchString";
 import fetchData from "@/lib/fetchData";
 import { JobsResults } from "@/models/Jobs";
-import { ParsedUrlQuery } from "querystring";
+import Search from "@/app/components/Search";
+import FiltreCheckbox from "@/app/components/FiltreCheckbox";
+import Joburi from "@/app/components/Joburi";
+import Pagination from "@/app/components/Pagination";
+import Footer from "@/app/components/Footer";
 
 interface ResultsProps {
   initialData: JobsResults;
 }
 
-const Results = ({ initialData }: ResultsProps) => {
+const Results: NextPage<ResultsProps> = ({ initialData }) => {
   const numFound: number | undefined = initialData?.numFound;
   return (
     <div className="rezultate-pagina flex flex-col justify-between items-center min-h-[100vh]">
       <Search />
       <FiltreCheckbox />
-
       <Joburi data={initialData} />
-
       <Pagination numFound={numFound} />
-
       <Footer />
     </div>
   );
 };
 
-export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
+export const getServerSideProps: GetServerSideProps<ResultsProps> = async ({
+  query,
+}: GetServerSidePropsContext<ParsedUrlQuery>) => {
   try {
     const job = query.job as string | undefined;
     const oras = query.oras as string | undefined;
@@ -49,10 +51,10 @@ export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
     // Fetch data from API
     const initialData = await fetchData(paramsSearch);
 
-    // Pass data to the component props
+    // Return the props object
     return {
       props: {
-        initialData,
+        initialData: initialData || { numFound: 0, docs: [] }, // Ensure initialData is always defined and matches the expected structure
       },
     };
   } catch (error) {
@@ -60,10 +62,10 @@ export async function getServerSideProps({ query }: { query: ParsedUrlQuery }) {
     // Return an empty props object or handle error as needed
     return {
       props: {
-        initialData: [],
+        initialData: { numFound: 0, docs: [] }, // Provide a fallback in case of error
       },
     };
   }
-}
+};
 
 export default Results;
