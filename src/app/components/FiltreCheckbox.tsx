@@ -12,9 +12,9 @@ function FiltreCheckbox() {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const remote = searchParams.getAll("tipJob");
-  const city = searchParams.getAll("oras");
-  const company = searchParams.getAll("companie");
+  const remote = searchParams?.getAll("tipJob");
+  const city = searchParams?.getAll("oras");
+  const company = searchParams?.getAll("companie");
   const [data, setData] = useState<CompaniesName | undefined>();
 
   // use it for closing dropdown on click
@@ -35,9 +35,9 @@ function FiltreCheckbox() {
   // Get a new searchParams string by merging the current
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const currentParams = new URLSearchParams(searchParams.toString());
+      const currentParams = new URLSearchParams(searchParams?.toString());
 
-      if (remote.includes(value)) {
+      if (remote?.includes(value)) {
         // If the radio button is already checked, uncheck it
         currentParams.delete(name);
       } else {
@@ -87,21 +87,25 @@ function FiltreCheckbox() {
   // Function to get button label based on index and fields
   const getButtonLabel = (index: number) => {
     if (index === 0) {
-      return `Oraș ${city.length >= 1 ? `(${city.length})` : ""}`;
+      return `Oraș ${city && city.length >= 1 ? `(${city?.length})` : ""}`;
     } else if (index === 1) {
-      return `Companie ${company.length >= 1 ? `(${company.length})` : ""}`;
+      return `Companie ${
+        company && company.length >= 1 ? `(${company?.length})` : ""
+      }`;
     } else {
-      return `Mod de lucru ${remote.length >= 1 ? `(${remote.length})` : ""}`;
+      return `Mod de lucru ${
+        remote && remote.length >= 1 ? `(${remote?.length})` : ""
+      }`;
     }
   };
 
   // Function to get button style based on index and fields
   const getButtonStyle = (index: number) => {
-    if (index === 0 && city.length >= 1) {
+    if (index === 0 && city && city.length >= 1) {
       return "text-background_green";
-    } else if (index === 1 && company.length >= 1) {
+    } else if (index === 1 && company && company.length >= 1) {
       return "text-background_green";
-    } else if (index === 2 && remote.length >= 1) {
+    } else if (index === 2 && remote && remote.length >= 1) {
       return "text-background_green";
     } else {
       return {};

@@ -31,12 +31,12 @@ export default function JobCard({ item }: Props) {
         />
       </div>
       <div className="flex flex-col justify-between gap-5 max-w-[280px] lg:max-w-[364px]">
-        <p className="leading-5" title={company.join("")}>
+        <p className="leading-5" title={company?.join("")}>
           {company}
         </p>
         <p
           className="text-lg font-bold truncate cursor-help"
-          title={job_title.join("")}
+          title={job_title?.join("")}
         >
           {job_title}
         </p>
@@ -45,7 +45,7 @@ export default function JobCard({ item }: Props) {
           <p>{city || remote ? displayLocation(city) : ""}</p>
         </div>
         <Link
-          href={job_link[0]}
+          href={job_link ? job_link[0] : ""}
           target="_blank"
           className="bg-background_green px-[40px] py-[14px] text-white rounded-3xl mx-auto hover:shadow-button_shadow transition duration-300 ease-out"
         >

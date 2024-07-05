@@ -14,8 +14,11 @@ export default function Pagination({ numFound }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
-  const currentPage = Number(searchParams.get("pagina")) || 1;
+  const params = searchParams
+    ? new URLSearchParams(searchParams)
+    : new URLSearchParams();
+
+  const currentPage = Number(searchParams?.get("pagina")) || 1;
   const perPage = 12;
 
   const totalPages = Math.ceil((numFound ?? 0) / perPage);

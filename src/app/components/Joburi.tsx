@@ -6,7 +6,7 @@ import FaraRezultate from "./NoResults";
 type Props = {
   data: JobsResults | undefined;
 };
-const Joburi = async ({ data }: Props) => {
+const Joburi = ({ data }: Props) => {
   const nrJoburi =
     (data?.numFound ?? 0) >= 20
       ? "de rezultate"
