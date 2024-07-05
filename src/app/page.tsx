@@ -11,9 +11,11 @@ import { Metadata } from "next";
 export async function generateMetadata(): Promise<Metadata> {
   const numFound = await getNumberOfJobs();
 
+  const numFoundText = numFound && numFound > 1 ? `pentru ${numFound}` : "";
   return {
-    title: `pe viitor | ${numFound}`,
-    description: `peste ${numFound} locuri de munca in`,
+    title: `peviitor | Motor de căutare ${numFoundText} locuri de muncă`,
+    description: `peviitor.ro - Motor de căutare  ${numFoundText} locuri de muncă disponibile`,
+    keywords: `locuri de muncă, joburi, oportunități, carieră`,
   };
 }
 

@@ -1,6 +1,6 @@
 import "./globals.css";
 
-export const revalidate = 360;
+export const dynamic = "force-dynamic";
 
 export default function RootLayout({
   children,

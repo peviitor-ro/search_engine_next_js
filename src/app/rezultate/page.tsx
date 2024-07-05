@@ -8,7 +8,6 @@ import { createSearchString } from "@/lib/createSearchString";
 import fetchData from "@/lib/fetchData";
 import { JobsResults } from "@/models/Jobs";
 import { Metadata } from "next";
-import DisplayFilters from "../components/DisplayFilters";
 
 export async function generateMetadata({
   searchParams,
@@ -38,11 +37,33 @@ export async function generateMetadata({
 
   const data: JobsResults | undefined = await fetchData(paramsSearch);
   const numFound: number | undefined = data?.numFound;
+
+  const queryText = query ? ` pentru postul de ${query}` : "";
+  const companyText = company ? ` la compania ${company}` : "";
+  const keywords = `${query}, locuri de muncă, joburi, oportunități, carieră, ${
+    company ? company : ""
+  }`;
+
+  let title = `🔍 Locuri de muncă te așteaptă!`;
+  let description = `Descoperă oportunități de carieră${queryText}${companyText}. Începe-ți călătoria profesională acum!`;
+
+  if (numFound !== undefined) {
+    if (numFound === 0) {
+      title = `🔍 Niciun loc de muncă${queryText} nu a fost găsit`;
+      description = `Nu am găsit oportunități de carieră${queryText}${companyText}. Verifică mai târziu pentru noi oferte.`;
+    } else if (numFound === 1) {
+      title = `🔍 Un loc de muncă ${queryText} te așteaptă!`;
+      description = `Descoperă o oportunitate de carieră${queryText}${companyText}. Începe-ți călătoria profesională acum!`;
+    } else {
+      title = `🔍 ${numFound} locuri de muncă${queryText} te așteaptă!`;
+      description = `Descoperă peste ${numFound} oportunități de carieră${queryText}${companyText}. Începe-ți călătoria profesională acum!`;
+    }
+  }
+
   return {
-    title: `Job: ${query} | Rezultate: ${numFound}`,
-    description: `Peste ${numFound} de locuri de munca pe postul de ${query} ${
-      company ? `la firma ${company}` : ""
-    }`,
+    title,
+    description,
+    keywords,
   };
 }
 
@@ -50,11 +71,11 @@ export default async function SearchResults({
   searchParams,
 }: {
   searchParams: {
-    job: string | undefined;
-    companie: string | undefined;
-    oras: string | undefined;
-    tipJob: string | undefined;
-    pagina: string | undefined;
+    job: string;
+    companie: string;
+    oras: string;
+    tipJob: string;
+    pagina: string;
   };
 }) {
   // Extract values from searchParams and if the value is undefined sets to ""

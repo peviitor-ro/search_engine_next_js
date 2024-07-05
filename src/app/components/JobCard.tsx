@@ -15,8 +15,8 @@ export default function JobCard({ item }: Props) {
     return cities
       ? cities[0].toLowerCase() === "all"
         ? "Toate orasele"
-        : cities.length > 5
-        ? `${cities.slice(0, 5).join(", ")} + ${cities.length - 5}`
+        : cities.length > 4
+        ? `${cities.slice(0, 4).join(", ")} + ${cities.length - 4}`
         : cities.join(", ")
       : remote?.join(", ");
   }
@@ -31,12 +31,12 @@ export default function JobCard({ item }: Props) {
         />
       </div>
       <div className="flex flex-col justify-between gap-5 max-w-[280px] lg:max-w-[364px]">
-        <p className="leading-5" title={company.join("")}>
+        <p className="leading-5" title={company?.join("")}>
           {company}
         </p>
         <p
           className="text-lg font-bold truncate cursor-help"
-          title={job_title.join("")}
+          title={job_title?.join("")}
         >
           {job_title}
         </p>
