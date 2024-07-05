@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "export": "next export",
+    "predeploy": "npm run build",
+    "deploy": "cp -r .next/static out/static && cp -r .next/server out/server && cp -r public out",
     "start": "next start",
     "lint": "next lint"
   },
