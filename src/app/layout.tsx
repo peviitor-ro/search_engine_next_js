@@ -1,6 +1,6 @@
-import "./globals.css";
+"use client";
 
-export const dynamic = "force-dynamic";
+import "./globals.css";
 
 export default function RootLayout({
   children,
