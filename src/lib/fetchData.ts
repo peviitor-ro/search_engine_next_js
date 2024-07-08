@@ -14,7 +14,7 @@ export default async function fetchData(
       url += `?${createQueryString}`;
     }
 
-    const res = await fetch(url, { cache: "no-store" });
+    const res = await fetch(url);
 
     if (!res.ok) {
       throw new Error("Fetch error: Server responded with an error");
@@ -61,7 +61,7 @@ export const getNameOfCompanies = async (): Promise<
 // get number of Jobs
 export async function getNumberOfJobs(): Promise<number | undefined> {
   try {
-    const res = await fetch(API_JOBS_NUMBERS);
+    const res = await fetch(API_JOBS_NUMBERS, { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error("Fetch error: Server responded with an error");

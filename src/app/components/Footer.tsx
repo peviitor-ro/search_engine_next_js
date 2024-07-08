@@ -8,7 +8,7 @@ import dev from "../assets/svg/dev_icon.svg";
 
 export default function Footer() {
   return (
-    <footer className="w-[80%] md:w-[70%] flex flex-col gap-2 border-t border-border_grey pt-[20px]">
+    <footer className="w-[80%] md:w-[70%] flex flex-col gap-2 border-t border-border_grey pt-[20px] mb-5">
       <section className="flex justify-between flex-wrap">
         <div className="flex gap-[10px] justify-between flex-wrap items-center mx-auto md:mx-0">
           <a

@@ -92,6 +92,8 @@ const CheckboxFilter = ({
       if (currentValues.includes(value)) {
         // Remove the value if it exists
         params.delete(name);
+        // Set the page parameter to 1 when applying filters
+        params.set("pagina", "1");
         currentValues
           .filter((val) => val !== value)
           .forEach((val) => {

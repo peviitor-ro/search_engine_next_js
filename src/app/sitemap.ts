@@ -65,5 +65,6 @@ export default async function sitemap({
       url: urlSite,
     },
     // ...jobEntries,
+    // ...jobEntries,
   ];
 }

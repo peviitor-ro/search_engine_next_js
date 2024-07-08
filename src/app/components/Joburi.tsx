@@ -25,11 +25,11 @@ const Joburi = ({ data }: Props) => {
       {data?.numFound === 0 ? (
         <FaraRezultate />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 w-fit mx-auto">
+        <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 w-fit mx-auto">
           {data?.docs.map((item, index) => (
             <JobCard item={item} key={index} />
           ))}
-        </div>
+        </section>
       )}
     </main>
   );

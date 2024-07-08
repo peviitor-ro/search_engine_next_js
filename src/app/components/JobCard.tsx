@@ -15,8 +15,8 @@ export default function JobCard({ item }: Props) {
     return cities
       ? cities[0].toLowerCase() === "all"
         ? "Toate orasele"
-        : cities.length > 5
-        ? `${cities.slice(0, 5).join(", ")} + ${cities.length - 5}`
+        : cities.length > 4
+        ? `${cities.slice(0, 4).join(", ")} + ${cities.length - 4}`
         : cities.join(", ")
       : remote?.join(", ");
   }
