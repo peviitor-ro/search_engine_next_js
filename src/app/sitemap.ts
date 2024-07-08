@@ -4,14 +4,13 @@ import { MetadataRoute } from "next";
 
 const urlSite = "https://peviitor.ro/";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-//   {
-//   searchParams,
-// }: {
-// searchParams: {
-//   job: string | undefined;
-// };
-// }
+export default async function sitemap({
+  searchParams,
+}: {
+  searchParams: {
+    job: string | undefined;
+  };
+}): Promise<MetadataRoute.Sitemap> {
   // const jobEntries: MetadataRoute.Sitemap = [];
   // const seenJobTitles = new Set<string>();
 
@@ -35,17 +34,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   //     if (doc && Array.isArray(doc)) {
   //       for (const { job_title } of doc) {
-  //         if (job_title) {
-  //           for (const title of job_title) {
-  //             if (!seenJobTitles.has(title)) {
-  //               seenJobTitles.add(title);
-  //               jobEntries.push({
-  //                 url: `${urlSite}rezultate?job=${encodeURIComponent(
-  //                   title.replace(/&/g, "&amp;")
-  //                 )}`,
-  //                 changeFrequency: "weekly",
-  //               });
-  //             }
+  //         for (const title of job_title) {
+  //           if (!seenJobTitles.has(title)) {
+  //             seenJobTitles.add(title);
+  //             jobEntries.push({
+  //               url: `${urlSite}rezultate?job=${encodeURIComponent(
+  //                 title.replace(/&/g, "&amp;")
+  //               )}`,
+  //               changeFrequency: "weekly",
+  //             });
   //           }
   //         }
   //       }
@@ -53,9 +50,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   //       throw new Error("Invalid data format or empty data");
   //     }
 
-  //     //! change 600 with data.numFound when backend is fixed
+  //     //!   change 600 with data.numFound when backend is fixed
   //     //! on 4700 error page 390
-  //     totalPages = Math.ceil(7000 / 12);
+  //     totalPages = Math.ceil(4700 / 12);
   //     currentPage++;
   //   } while (currentPage <= totalPages);
   // } catch (error) {
@@ -67,6 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: urlSite,
     },
+    // ...jobEntries,
     // ...jobEntries,
   ];
 }

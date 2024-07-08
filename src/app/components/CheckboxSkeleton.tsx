@@ -86,7 +86,7 @@ const CheckboxFilter = ({
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParams?.toString());
       const currentValues = params.getAll(name);
 
       if (currentValues.includes(value)) {

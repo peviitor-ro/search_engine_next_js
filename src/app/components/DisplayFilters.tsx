@@ -11,14 +11,18 @@ const DisplayFilters = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const remote = searchParams.getAll("tipJob");
-  const city = searchParams.getAll("oras");
-  const company = searchParams.getAll("companie");
+  const remote = searchParams?.getAll("tipJob");
+  const city = searchParams?.getAll("oras");
+  const company = searchParams?.getAll("companie");
 
-  const filtersArray = remote.concat(city, company);
+  const cityArray = city ? city : [];
+  const companyArray = company ? company : [];
+
+  // Concatenate arrays safely
+  const filtersArray = (remote ? remote : []).concat(cityArray, companyArray);
 
   const handleDeleteAll = () => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams?.toString());
     params.delete("oras");
     params.delete("tipJob");
     params.delete("companie");
@@ -28,7 +32,7 @@ const DisplayFilters = () => {
 
   function renderFilter(type: string[]) {
     const handleFilterDelete = (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const params = new URLSearchParams(searchParams?.toString());
       const currentValues = params.getAll(name);
 
       if (currentValues.includes(value)) {
@@ -68,10 +72,10 @@ const DisplayFilters = () => {
 
   return (
     <ul className="pb-9 flex gap-2 flex-wrap justify-center lg:justify-start">
-      {renderFilter(city)}
-      {renderFilter(remote)}
-      {renderFilter(company)}
-      {filtersArray.length > 0 && (
+      {city && renderFilter(city)}
+      {remote && renderFilter(remote)}
+      {company && renderFilter(company)}
+      {filtersArray && filtersArray.length > 0 && (
         <div className="flex gap-2 ml-4">
           <hr className="h-auto w-[1px] bg-background_dark_blue" />
           <span

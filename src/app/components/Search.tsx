@@ -61,8 +61,7 @@ function Search() {
     e.preventDefault();
 
     if (!text.trim()) {
-      router.push("/rezultate?pagina=1");
-      router.refresh();
+      router.push("/rezultate");
     } else {
       router.push(`/rezultate?${createQueryString("job", text)}`);
     }
@@ -76,7 +75,7 @@ function Search() {
   return (
     <div>
       <div className="flex flex-col md:flex-row items-center justify-center pt-5 gap-2">
-        {pathName.startsWith("/rezultate") && (
+        {pathName?.startsWith("/rezultate") && (
           <Link href="/" className="logo">
             <Image src={logo} alt="logo_peviitor" />
           </Link>

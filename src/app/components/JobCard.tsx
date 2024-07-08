@@ -45,7 +45,7 @@ export default function JobCard({ item }: Props) {
           <p>{city || remote ? displayLocation(city) : ""}</p>
         </div>
         <Link
-          href={job_link[0]}
+          href={job_link ? job_link[0] : ""}
           target="_blank"
           className="bg-background_green px-[40px] py-[14px] text-white rounded-3xl mx-auto hover:shadow-button_shadow transition duration-300 ease-out"
         >

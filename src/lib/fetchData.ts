@@ -30,9 +30,9 @@ export default async function fetchData(
     return parsedData as JobsResults;
   } catch (error) {
     console.error("Error fetching data:", error);
+    return undefined; // Return undefined on error
   }
 }
-
 // Fetch for checkbox companies
 export const getNameOfCompanies = async (): Promise<
   CompaniesName | undefined
