@@ -79,10 +79,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
-      - name: Remove pages with getServerSideProps from export
-        run: |
-          echo "Excluding pages with getServerSideProps from export..."
-          sed -i '/getServerSideProps/d' next.config.js
+
   # Deployment job
   deploy:
     environment:
