@@ -1,13 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  generateStaticParams() {
-    // Generate static parameters for pages here
-    return {
-      "/": {
-        /* Static parameters for root */
-      },
-    };
-  },
-};
+const nextConfig = {};
 
 export default nextConfig;
