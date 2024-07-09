@@ -8,6 +8,9 @@ const nextConfig = {
   basePath: "/search_engine_next_js",
   assetPrefix: "/search_engine_next_js/",
   trailingSlash: true,
+  publicRuntimeConfig: {
+    basePath: "/search_engine_next_js",
+  },
 };
 
 export default nextConfig;

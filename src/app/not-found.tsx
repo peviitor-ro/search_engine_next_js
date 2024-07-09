@@ -18,7 +18,7 @@ export default function FaraPagina() {
         </div>
         <Image className="w-250px h-56 md:w-1/5" src={strut} alt="not-found" />
       </div>
-      <CountdownButton />
+      {/* <CountdownButton /> */}
       <Footer />
     </div>
   );
