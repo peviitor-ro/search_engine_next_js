@@ -6,7 +6,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: "/search_engine_next_js",
+  basePath: "/search_engine_next_js/",
   assetPrefix: "/search_engine_next_js/",
   trailingSlash: true,
   publicRuntimeConfig: {
