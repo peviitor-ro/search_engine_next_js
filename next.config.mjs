@@ -1,16 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  reactStrictMode: true,
-  distDir: "out",
+  basePath: "/search_engine_next_js",
+  assetPrefix: "/search_engine_next_js/",
   images: {
     unoptimized: true,
-  },
-  basePath: "/search_engine_next_js/",
-  assetPrefix: "/search_engine_next_js/",
-  trailingSlash: true,
-  publicRuntimeConfig: {
-    basePath: "/search_engine_next_js",
   },
 };
 
