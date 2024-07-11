@@ -61,7 +61,7 @@ function Search() {
     e.preventDefault();
 
     if (!text.trim()) {
-      router.push("/rezultate");
+      router.push("/rezultate/?pagina=1");
     } else {
       router.push(`/rezultate?${createQueryString("job", text)}`);
     }
