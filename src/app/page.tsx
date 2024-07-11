@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Search from "./components/Search";
 import peViitorLogo from "@/app/assets/svg/logo.svg";
@@ -5,22 +6,22 @@ import racheta from "@/app/assets/svg/racheta.svg";
 import dungi from "@/app/assets/svg/dungi.svg";
 import Footer from "./components/Footer";
 import { getNumberOfJobs } from "@/lib/fetchData";
-import { Suspense } from "react";
-import { Metadata } from "next";
+import { Suspense, useEffect, useState } from "react";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const numFound = await getNumberOfJobs();
+export default function Home() {
+  const [data, setData] = useState<number | undefined>(undefined);
 
-  const numFoundText = numFound && numFound > 1 ? `pentru ${numFound}` : "";
-  return {
-    title: `peviitor | Motor de căutare ${numFoundText} locuri de muncă`,
-    description: `peviitor.ro - Motor de căutare  ${numFoundText} locuri de muncă disponibile`,
-    keywords: `locuri de muncă, joburi, oportunități, carieră`,
-  };
-}
+  useEffect(() => {
+    const fetchJobsData = async () => {
+      const numFound = await getNumberOfJobs();
 
-export default async function Home() {
-  const numFound = await getNumberOfJobs();
+      if (numFound) {
+        setData(numFound);
+      }
+    };
+
+    fetchJobsData();
+  }, []);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -41,8 +42,8 @@ export default async function Home() {
                 la un clic distanță
               </h1>
               <h4 className="text-lg leading-6 text-text_grey">
-                Peste <strong className="text-black">{numFound}</strong> de
-                locuri de muncă din România actualizate zilnic
+                Peste <strong className="text-black">{data}</strong> de locuri
+                de muncă din România actualizate zilnic
               </h4>
             </div>
           </div>
