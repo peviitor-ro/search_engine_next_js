@@ -26,7 +26,13 @@ export default function SearchResults({
 
   useEffect(() => {
     const fetchJobsData = async () => {
-      const { job, companie, oras, tipJob, pagina } = searchParams;
+      const {
+        job = "",
+        companie = "",
+        oras = "",
+        tipJob = "",
+        pagina = "1",
+      } = searchParams;
       const paramsSearch = createSearchString(
         job,
         oras,
