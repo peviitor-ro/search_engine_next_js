@@ -45,9 +45,8 @@ export function createSearchString(
   // Check and include 'remote' if not empty
   processParam("remote", remote);
 
-  // Always include 'page'
-  if (page != null) {
-    queryParams.push(`page=${page}`);
+  if (page != null && page.trim() !== "") {
+    queryParams.push(`page=${encodeURIComponent(page)}`);
   }
 
   return queryParams.join("&");

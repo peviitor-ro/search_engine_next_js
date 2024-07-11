@@ -37,6 +37,8 @@ export default function SearchResults({
         pagina
       );
 
+      console.log(paramsSearch);
+
       try {
         const fetchedData: JobsResults | undefined = await fetchData(
           paramsSearch
