@@ -37,13 +37,17 @@ export default function SearchResults({
         pagina
       );
 
-      const fetchedData: JobsResults | undefined = await fetchData(
-        paramsSearch
-      );
+      try {
+        const fetchedData: JobsResults | undefined = await fetchData(
+          paramsSearch
+        );
 
-      if (fetchedData) {
-        setData(fetchedData);
-        setNumFound(fetchedData.numFound);
+        if (fetchedData) {
+          setData(fetchedData);
+          setNumFound(fetchedData.numFound);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     };
 
