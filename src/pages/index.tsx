@@ -34,6 +34,14 @@ export default function Home() {
           name="description"
           content={`peviitor.ro - Motor de căutare  ${data} locuri de muncă disponibile`}
         />
+        <meta
+          property="og:title"
+          content={`peviitor | Motor de căutare ${data} locuri de muncă`}
+        />
+        <meta
+          property="og:description"
+          content={`peviitor.ro - Motor de căutare  ${data} locuri de muncă disponibile`}
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
