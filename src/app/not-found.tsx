@@ -23,7 +23,7 @@ export default function FaraPagina() {
           fetchPriority="auto"
         />
       </div>
-      {/* <CountdownButton /> */}
+      <CountdownButton />
       <Footer />
     </div>
   );
