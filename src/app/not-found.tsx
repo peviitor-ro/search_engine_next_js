@@ -16,7 +16,12 @@ export default function FaraPagina() {
             Pagina dorită nu a putut fi găsită
           </h4>
         </div>
-        <Image className="w-250px h-56 md:w-1/5" src={strut} alt="not-found" />
+        <Image
+          className="w-250px h-56 md:w-1/5"
+          src={strut}
+          alt="not-found"
+          fetchPriority="auto"
+        />
       </div>
       {/* <CountdownButton /> */}
       <Footer />
