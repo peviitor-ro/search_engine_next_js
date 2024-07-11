@@ -28,7 +28,7 @@ function Search() {
       }
 
       if (name) {
-        currentParams.set(name, value);
+        currentParams.set(name, encodeURIComponent(value));
       } else {
         currentParams.delete(name);
       }

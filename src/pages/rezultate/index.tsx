@@ -11,6 +11,7 @@ import Pagination from "@/app/components/Pagination";
 import Footer from "@/app/components/Footer";
 import Search from "@/app/components/Search";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const SearchResults = () => {
   const router = useRouter();
@@ -48,17 +49,45 @@ const SearchResults = () => {
     fetchJobsData();
   }, [job, companie, oras, tipJob, pagina]);
 
-  return (
-    <div className="rezultate-pagina flex flex-col justify-between items-center min-h-[100vh]">
-      <Search />
-      <FiltreCheckbox />
-      <Suspense fallback={<div>Loading Jobs...</div>}>
-        <Joburi data={data} />
-      </Suspense>
-      <Pagination numFound={numFound} />
+  const queryText = job ? ` pentru postul de ${job}` : "";
+  const companyText = companie ? ` la compania ${companie}` : "";
 
-      <Footer />
-    </div>
+  let title = `🔍 Locuri de muncă te așteaptă!`;
+  let description = `Descoperă oportunități de carieră${queryText}${companyText}. Începe-ți călătoria profesională acum!`;
+
+  if (numFound !== undefined) {
+    if (numFound === 0) {
+      title = `🔍 Niciun loc de muncă${queryText} nu a fost găsit`;
+      description = `Nu am găsit oportunități de carieră${queryText}${companyText}. Verifică mai târziu pentru noi oferte.`;
+    } else if (numFound === 1) {
+      title = `🔍 Un loc de muncă ${queryText} te așteaptă!`;
+      description = `Descoperă o oportunitate de carieră${queryText}${companyText}. Începe-ți călătoria profesională acum!`;
+    } else {
+      title = `🔍 ${numFound} locuri de muncă${queryText} te așteaptă!`;
+      description = `Descoperă peste ${numFound} oportunități de carieră${queryText}${companyText}. Începe-ți călătoria profesională acum!`;
+    }
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="UTF-8" />
+        <meta property="og:type" content="website" />
+      </Head>
+      <div className="rezultate-pagina flex flex-col justify-between items-center min-h-[100vh]">
+        <Search />
+        <FiltreCheckbox />
+        <Suspense fallback={<div>Loading Jobs...</div>}>
+          <Joburi data={data} />
+        </Suspense>
+        <Pagination numFound={numFound} />
+
+        <Footer />
+      </div>
+    </>
   );
 };
 

@@ -13,12 +13,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         {/* Open Graph Meta Tags */}
         <meta property="og:image" content="/opengraph-image.png" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={process.env.NEXT_PUBLIC_SITE_URL} />
+        {/* <meta property="og:url" content={process.env.NEXT_PUBLIC_SITE_URL} /> */}
 
         {/* Favicons */}
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
-
-        {/* Fallback favicon for older browsers */}
         <link rel="shortcut icon" href="/favicon.png" />
 
         {/* iOS icons */}
