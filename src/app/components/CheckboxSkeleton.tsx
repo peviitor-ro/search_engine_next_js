@@ -1,6 +1,6 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import magnifyGlass from "@/app/assets/svg/magniy_glass_icon.svg";
 
@@ -11,12 +11,6 @@ type checkboxProps = {
   checked?: string[];
   dropDown: boolean[];
 };
-// Regular expressions for replacing special characters
-const aREG = new RegExp("ș", "g");
-const bREG = new RegExp("ț", "g");
-const cREG = new RegExp("â", "g");
-const dREG = new RegExp("ă", "g");
-const eREG = new RegExp("î", "g");
 
 // CheckboxFilter component for filtering items
 const CheckboxFilter = ({
@@ -26,7 +20,10 @@ const CheckboxFilter = ({
   checked,
   dropDown,
 }: checkboxProps) => {
-  const [searchQuery, setSearchQuery] = useState("");
+  // State to store the input value
+  const [inputValue, setInputValue] = useState("");
+  // State to store the filtered list of cities
+  const [filteredItems, setFilteredItems] = useState(items);
   const [error, setError] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -35,54 +32,42 @@ const CheckboxFilter = ({
   // Empty the search value when dropdown its closed
   useEffect(() => {
     if (dropDown[0] || dropDown[1]) {
-      setSearchQuery("");
+      setInputValue("");
+      setFilteredItems(items);
     }
-  }, [dropDown]);
+  }, [dropDown, items]);
 
-  // Filtering items based on search query
-  const filteredItems = items?.filter(
-    (item) =>
-      (searchQuery.length >= 3 &&
-        item
-          .toLowerCase()
-          .replace(aREG, "s")
-          .replace(bREG, "t")
-          .replace(cREG, "a")
-          .replace(dREG, "a")
-          .replace(eREG, "i")
-          .includes(searchQuery.toLowerCase())) ||
-      (searchQuery.length >= 3 &&
-        item.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
+  // Function to handle changes in the input field
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value; // Get the current value of the input field
+    setInputValue(value); // Update the state with the new input value
+
+    // Create a regular expression to match the input value at the start of items names
+    const regex = new RegExp(`^${normalizeString(value)}`, "i"); // Normalize the input value before creating the regex
+
+    // Filter the items array based on the normalized input value
+    const filtered = items?.filter((data) =>
+      normalizeString(data).match(regex)
+    );
+
+    // Update the state with the filtered list of items
+    setFilteredItems(filtered);
+  };
+
+  // Function to normalize strings by removing diacritical marks (accents)
+  const normalizeString = (str: string) => {
+    // Normalize the string to decompose characters and diacritics
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    // \u0300-\u036f is a range of Unicode for diacritical marks
+  };
 
   // Effect to handle error when no results are found
   useEffect(() => {
-    setError(filteredItems?.length === 0 && searchQuery.length > 3);
-  }, [filteredItems, searchQuery]);
+    setError(filteredItems?.length === 0 && inputValue.length > 0);
+  }, [filteredItems, inputValue]);
 
-  // Displaying filtered items with exact matches first
   const displayItems =
-    searchQuery.length >= 3
-      ? [
-          // Items that exactly match the search query
-          ...(filteredItems?.filter(
-            (item) => item.toLowerCase() === searchQuery.toLowerCase()
-          ) || []),
-          // Items that start with the search query
-          ...(filteredItems?.filter(
-            (item) =>
-              item.toLowerCase() !== searchQuery.toLowerCase() &&
-              item.toLowerCase().startsWith(searchQuery.toLowerCase())
-          ) || []),
-          // Items that contain the searc2h query but do not match exactly or start with it
-          ...(filteredItems?.filter(
-            (item) => !item.toLowerCase().startsWith(searchQuery.toLowerCase())
-          ) || []),
-        ]
-      : items?.slice(0, 25);
-
-  // If displayItems is undefined, default to an empty array to avoid errors
-  const itemsToDisplay = displayItems || [];
+    inputValue.length >= 1 ? filteredItems : filteredItems?.slice(0, 25);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -123,20 +108,18 @@ const CheckboxFilter = ({
         />
         <input
           type="search"
-          value={searchQuery}
+          value={inputValue}
           placeholder={`Cauta ${searchFor}`}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={handleInputChange}
           className="border-0 outline-none py-[10px] text-sm w-[190px] rounded-full"
         />
       </div>
 
       <div className="flex flex-col gap-2 py-[1px] px-1 max-w-[230px] h-[220px] overflow-y-auto scrollbar-class overflow-x-hidden">
-        {searchQuery.length >= 1 && searchQuery.length < 3 ? (
-          <div>Tasteaza mai mult de 3 caractere</div>
-        ) : error ? (
-          <div>No results found for {searchQuery}</div>
+        {error ? (
+          <div>Nu există rezultate "{inputValue}"</div>
         ) : (
-          itemsToDisplay?.map((item, index) => (
+          displayItems?.map((item, index) => (
             <div key={index}>
               <input
                 type="checkbox"

@@ -48,11 +48,7 @@ export default function Home() {
       <Suspense fallback={<div>Loading...</div>}>
         <div className="landing-page flex flex-col justify-between items-center py-5 min-h-[100vh]">
           <nav className="w-[70%] md:w-[70%] border-b border-border_grey">
-            <Image
-              src={peViitorLogo}
-              alt="peviitor-logo"
-              fetchPriority="auto"
-            />
+            <Image src={peViitorLogo} alt="peviitor-logo" />
           </nav>
           <main className="w-[70%] flex flex-wrap justify-center md:gap-2 lg:gap-0 items-center sm:items-start mt-[2em] mb-[10em] font-PoppinsRegular text-left">
             <div className="order-1">
@@ -63,7 +59,6 @@ export default function Home() {
                     src={dungi}
                     alt="dungi"
                     className="absolute top-[128px] left-[-30px] scale-[0.7] md:scale-[0.9] md:top-[90px] md:left-[-30px] lg:top-[140px] lg:left-[-50px] lg:scale-[0.7] xl:top-[115px] xl:left-[180px] xl:scale-110"
-                    fetchPriority="auto"
                   />{" "}
                   la un clic distanță
                 </h1>
@@ -74,7 +69,7 @@ export default function Home() {
               </div>
             </div>
             <div className="order-3 lg:order-1">
-              <Image src={racheta} alt="racheta" fetchPriority="auto" />
+              <Image src={racheta} alt="racheta" />
             </div>
             <div className="order-2 lg:order-2  2xl:shrink-0 2xl:grow-0 2xl:basis-[80%]">
               <Search />
