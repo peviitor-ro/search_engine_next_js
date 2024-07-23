@@ -117,7 +117,7 @@ const CheckboxFilter = ({
 
       <div className="flex flex-col gap-2 py-[1px] px-1 max-w-[230px] h-[220px] overflow-y-auto scrollbar-class overflow-x-hidden">
         {error ? (
-          <div>Nu există rezultate "{inputValue}"</div>
+          <div>Nu există rezultate &quot; {inputValue} &quot;</div>
         ) : (
           displayItems?.map((item, index) => (
             <div key={index}>
