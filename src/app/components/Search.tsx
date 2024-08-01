@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState, FormEvent, useCallback } from "react";
+import { useState, FormEvent, useCallback, useEffect } from "react";
 import logo from "../assets/svg/logo.svg";
 import magnifyGlass from "../assets/svg/magniy_glass_icon.svg";
 
@@ -13,6 +13,11 @@ function Search() {
   const router = useRouter();
   const pathName = usePathname();
   const [text, setText] = useState(getQ || "");
+
+  // Effect to update state when URL parameter changes
+  useEffect(() => {
+    setText(getQ || "");
+  }, [getQ]);
 
   // Create query for the job title
   const createQueryString = useCallback(

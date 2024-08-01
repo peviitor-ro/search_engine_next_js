@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "deploy": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev": "dotenv -e ./env/.env.local next dev",
+    "build": "dotenv -e ./env/.env.production next build",
+    "start": "dotenv -e ./env/.env.production next start",
+    "start:local": "dotenv -e ./env/.env.local next start",
+    "start:qa": "dotenv -e ./env/.env.qa next start",
+    "build:local": "dotenv -e ./env/.env.local next build",
+    "build:qa": "dotenv -e ./env/.env.qa next build",
+    "build:production": "dotenv -e ./env/.env.production next build",
+    "build:final": "dotenv -e ./env/.env.final next build"
   },
   "dependencies": {
     "next": "14.2.3",
@@ -19,6 +24,7 @@
     "@types/node": "^20",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18",
+    "dotenv-cli": "^7.4.2",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8",
