@@ -27,7 +27,7 @@ const FilterCities = ({ dropDown }: checkboxProps) => {
       setInputValue("");
       setFilteredItems(orase);
     }
-  }, [dropDown, orase]);
+  }, [dropDown]);
 
   // Function to handle changes in the input field
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

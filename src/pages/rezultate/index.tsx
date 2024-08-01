@@ -18,6 +18,7 @@ const SearchResults = () => {
 
   const [data, setData] = useState<JobsResults | undefined>(undefined);
   const [numFound, setNumFound] = useState<number | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchJobsData = async () => {
@@ -32,6 +33,7 @@ const SearchResults = () => {
       );
 
       try {
+        setLoading(true);
         const fetchedData: JobsResults | undefined = await fetchData(
           paramsSearch
         );
@@ -42,6 +44,8 @@ const SearchResults = () => {
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -52,11 +56,8 @@ const SearchResults = () => {
     <div className="rezultate-pagina flex flex-col justify-between items-center min-h-[100vh]">
       <Search />
       <FilterCheckbox />
-      <Suspense fallback={<div>Loading Jobs...</div>}>
-        <Joburi data={data} />
-      </Suspense>
+      <Joburi data={data} loading={loading} />
       <Pagination numFound={numFound} />
-
       <Footer />
     </div>
   );

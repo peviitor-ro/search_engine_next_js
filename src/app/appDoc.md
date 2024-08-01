@@ -3,12 +3,9 @@
 This documentation provides a comprehensive overview of the files within the `app` folder, detailing their purposes and functionalities. The App folder consists of the following files:
 
 1. 🌐 `globals.css`
-2. 🖼️ `icon.ico`
-3. 📸 `opengraph-image.png`
-4. 📄 `layout.tsx`
-5. 📑 `page.tsx`
-6. 🤖 `robots.ts`
-7. 🗺️ `sitemap.ts`
+2. 📄 `layout.tsx`
+3. 🤖 `robots.ts`
+4. 🗺️ `sitemap.ts`
 
 ## More details
 
@@ -18,37 +15,19 @@ This documentation provides a comprehensive overview of the files within the `ap
 
    - This file contains global CSS styles that are applied to the entire Next.js application.
 
-2. 🖼️ `icon.ico`
-
-   ### Description
-
-   - This file is the favicon.
-
-3. 📸 `opengraph-image.png`
-
-   ### Description
-
-   - This image file serves as the OpenGraph image.
-
-4. 📄 `layout.tsx`
+2. 📄 `layout.tsx`
 
    ### Description
 
    - This TypeScript file defines the layout structure.
 
-5. 📑 `page.tsx`
-
-   ### Description
-
-   - This file is home page of the site.
-
-6. 🤖 `robots.ts`
+3. 🤖 `robots.ts`
 
    ### Description
 
    - This file specifies the directives for web crawlers (e.g., search engine bots) about which pages to crawl or not to crawl.
 
-7. 🗺️ `sitemap.ts`
+4. 🗺️ `sitemap.ts`
 
    ### Description
 

@@ -98,7 +98,7 @@ function FilterCheckbox() {
   return (
     <div
       ref={refDropdown}
-      className="flex items-center justify-center flex-wrap mt-2 mx-auto w-fit gap-4 relative font-PoppinsRegular"
+      className="flex items-center justify-center flex-wrap mt-2 mx-auto w-fit gap-4 relative font-PoppinsRegular z-10"
     >
       {/* Mapping through each dropdown */}
       {dropDown.map((isOpen, index) => (
