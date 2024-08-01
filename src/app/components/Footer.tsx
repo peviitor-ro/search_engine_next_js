@@ -5,6 +5,7 @@ import github from "../assets/svg/github_icon.svg";
 import jitsi from "../assets/svg/jitsi_icon.svg";
 import instagram from "../assets/svg/instagram_icon.svg";
 import dev from "../assets/svg/dev_icon.svg";
+import api from "../assets/svg/api-svgrepo-com.svg";
 
 export default function Footer() {
   return (
@@ -54,8 +55,15 @@ export default function Footer() {
           >
             <Image src={jitsi} alt="jitsi icon" className="max-w-[100px]" />
           </a>
-          <a href="https://dev.to/t/peviitor" target="_blank" className="mx-2">
+          <a
+            href="https://dev.to/t/peviitor/latest"
+            target="_blank"
+            className="mx-2"
+          >
             <Image src={dev} alt="dev icon" className="max-w-[100px]" />
+          </a>
+          <a href="https://api.peviitor.ro/" target="_blank" className="mx-2">
+            <Image src={api} alt="API icon" className="max-w-[100px]" />
           </a>
         </div>
       </section>

@@ -24,6 +24,5 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  },
-  "homepage": "https://peviitor-ro.github.io/search_engine_next_js/"
+  }
 }
