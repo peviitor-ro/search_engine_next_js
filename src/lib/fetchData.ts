@@ -34,11 +34,11 @@ export default async function fetchData(
   }
 }
 // Fetch for checkbox companies
-export const getNameOfCompanies = async (): Promise<
-  CompaniesName | undefined
-> => {
+export const getNameOfCompanies = async (
+  value?: string
+): Promise<CompaniesName | undefined> => {
   try {
-    const res = await fetch(API_COMPANIES);
+    const res = await fetch(API_COMPANIES + `?userInput=${value}`);
 
     if (!res.ok)
       throw new Error(

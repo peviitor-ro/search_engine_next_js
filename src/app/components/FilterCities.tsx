@@ -3,39 +3,31 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import magnifyGlass from "@/app/assets/svg/magniy_glass_icon.svg";
+import { orase } from "@/lib/getCityName";
 
 type checkboxProps = {
-  items: string[] | undefined;
-  filterKey: string;
-  searchFor: string;
-  checked?: string[];
   dropDown: boolean[];
 };
 
 // CheckboxFilter component for filtering items
-const CheckboxFilter = ({
-  items,
-  filterKey,
-  searchFor,
-  checked,
-  dropDown,
-}: checkboxProps) => {
+const FilterCities = ({ dropDown }: checkboxProps) => {
   // State to store the input value
   const [inputValue, setInputValue] = useState("");
   // State to store the filtered list of cities
-  const [filteredItems, setFilteredItems] = useState(items);
+  const [filteredItems, setFilteredItems] = useState(orase);
   const [error, setError] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const city = searchParams?.getAll("oras");
 
   // Empty the search value when dropdown its closed
   useEffect(() => {
     if (dropDown[0] || dropDown[1]) {
       setInputValue("");
-      setFilteredItems(items);
+      setFilteredItems(orase);
     }
-  }, [dropDown, items]);
+  }, [dropDown, orase]);
 
   // Function to handle changes in the input field
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +38,7 @@ const CheckboxFilter = ({
     const regex = new RegExp(`^${normalizeString(value)}`, "i"); // Normalize the input value before creating the regex
 
     // Filter the items array based on the normalized input value
-    const filtered = items?.filter((data) =>
+    const filtered = orase?.filter((data) =>
       normalizeString(data).match(regex)
     );
 
@@ -65,9 +57,6 @@ const CheckboxFilter = ({
   useEffect(() => {
     setError(filteredItems?.length === 0 && inputValue.length > 0);
   }, [filteredItems, inputValue]);
-
-  const displayItems =
-    inputValue.length >= 1 ? filteredItems : filteredItems?.slice(0, 25);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -109,7 +98,7 @@ const CheckboxFilter = ({
         <input
           type="search"
           value={inputValue}
-          placeholder={`Cauta ${searchFor}`}
+          placeholder={`Cauta oraș`}
           onChange={handleInputChange}
           className="border-0 outline-none py-[10px] text-sm w-[190px] rounded-full"
         />
@@ -119,15 +108,15 @@ const CheckboxFilter = ({
         {error ? (
           <div>Nu există rezultate &quot; {inputValue} &quot;</div>
         ) : (
-          displayItems?.map((item, index) => (
+          filteredItems?.map((item, index) => (
             <div key={index}>
               <input
                 type="checkbox"
                 id={item}
-                name={filterKey}
+                name="oras"
                 value={item}
-                checked={checked?.includes(item)}
-                onChange={(e) => createQueryString(filterKey, e.target.value)}
+                checked={city?.includes(item)}
+                onChange={(e) => createQueryString("oras", e.target.value)}
                 className="accent-background_green"
               />
               <label htmlFor={item} className="pl-1 cursor-pointer">
@@ -141,4 +130,4 @@ const CheckboxFilter = ({
   );
 };
 
-export default CheckboxFilter;
+export default FilterCities;

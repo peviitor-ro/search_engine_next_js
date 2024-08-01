@@ -1,21 +1,18 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import CheckboxFilter from "./CheckboxSkeleton";
-import { CompaniesName } from "@/models/dataSchema";
-import { getNameOfCompanies } from "@/lib/fetchData";
-import { orase } from "@/lib/getCityName";
 import Image from "next/image";
 import sageata from "@/app/assets/svg/arrow_bottom.svg";
+import FilterCities from "./FilterCities";
+import FilterCompanies from "./FilterCompanies";
 
-function FiltreCheckbox() {
+function FilterCheckbox() {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const remote = searchParams?.getAll("tipJob");
   const city = searchParams?.getAll("oras");
   const company = searchParams?.getAll("companie");
-  const [data, setData] = useState<CompaniesName | undefined>();
 
   // use it for closing dropdown on click
   const refDropdown = useRef<HTMLDivElement>(null);
@@ -50,20 +47,6 @@ function FiltreCheckbox() {
     },
     [searchParams, pathname, router, remote]
   );
-
-  // Fetching company data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response: CompaniesName | undefined = await getNameOfCompanies();
-        setData(response);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   // For closing dropDown on click
   useEffect(() => {
@@ -127,7 +110,6 @@ function FiltreCheckbox() {
               index
             )} flex items-baseline bg-none border-none px-4 py-2 cursor-pointer hover:text-background_green`}
             onClick={() => handleDropDown(index)}
-            // style={getButtonStyle(index)}
           >
             {/* Dynamically set button label based on index */}
             {getButtonLabel(index)}
@@ -148,25 +130,13 @@ function FiltreCheckbox() {
             {/* Cities Drop-down */}
             {index === 0 && (
               <React.Fragment>
-                <CheckboxFilter
-                  items={orase}
-                  filterKey="oras"
-                  searchFor="oras"
-                  checked={city}
-                  dropDown={dropDown}
-                />
+                <FilterCities dropDown={dropDown} />
               </React.Fragment>
             )}
             {/* Companies Drop-down */}
             {index === 1 && (
               <React.Fragment>
-                <CheckboxFilter
-                  items={data}
-                  filterKey="companie"
-                  searchFor="companie"
-                  checked={company}
-                  dropDown={dropDown}
-                />
+                <FilterCompanies dropDown={dropDown} />
               </React.Fragment>
             )}
             {index === 2 && (
@@ -230,4 +200,4 @@ function FiltreCheckbox() {
   );
 }
 
-export default FiltreCheckbox;
+export default FilterCheckbox;

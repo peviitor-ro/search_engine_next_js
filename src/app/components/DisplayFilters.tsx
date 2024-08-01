@@ -71,22 +71,26 @@ const DisplayFilters = () => {
   }
 
   return (
-    <ul className="pb-9 flex gap-2 flex-wrap justify-center lg:justify-start">
-      {city && renderFilter(city)}
-      {remote && renderFilter(remote)}
-      {company && renderFilter(company)}
+    <>
       {filtersArray && filtersArray.length > 0 && (
-        <div className="flex gap-2 ml-4">
-          <hr className="h-auto w-[1px] bg-background_dark_blue" />
-          <span
-            className="self-center cursor-pointer"
-            onClick={handleDeleteAll}
-          >
-            Șterge Filtre
-          </span>
-        </div>
+        <ul className="pb-9 flex gap-2 flex-wrap justify-center lg:justify-start">
+          {city && renderFilter(city)}
+          {remote && renderFilter(remote)}
+          {company && renderFilter(company)}
+          {filtersArray && filtersArray.length > 0 && (
+            <div className="flex gap-2 ml-4">
+              <hr className="h-auto w-[1px] bg-background_dark_blue" />
+              <span
+                className="self-center cursor-pointer"
+                onClick={handleDeleteAll}
+              >
+                Șterge Filtre
+              </span>
+            </div>
+          )}
+        </ul>
       )}
-    </ul>
+    </>
   );
 };
 
