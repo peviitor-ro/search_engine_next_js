@@ -34,7 +34,7 @@ jobs:
         run: npm run build # or `yarn build` if you're using yarn
 
       - name: Export static files
-        run: npm run start # or `yarn export` if you're using yarn
+        run: npm run export # or `yarn export` if you're using yarn
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
