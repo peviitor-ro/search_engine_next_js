@@ -12,8 +12,7 @@
     "build:local": "dotenv -e ./env/.env.local next build",
     "build:qa": "dotenv -e ./env/.env.qa next build",
     "build:production": "dotenv -e ./env/.env.production next build",
-    "build:final": "dotenv -e ./env/.env.final next build",
-    "export": "next export"
+    "build:final": "dotenv -e ./env/.env.final next build"
   },
   "dependencies": {
     "next": "14.2.3",
